@@ -6,7 +6,9 @@ import 'package:arbetare/pages/pageSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-const backgroundColor = Color(0xFF3D4669);
+const backgroundColorTop = Color(0xFF3D4669);
+const backgroundColorMiddle = Color(0xFF455078);
+const backgroundColorBottom = Color(0xFF4F5C8B);
 const primary = Color(0xFF55749E);
 const secundary = Color(0xFFE6556E);
 const light = Color(0xFFF3F4F7);
@@ -58,20 +60,9 @@ class HomePage extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: backgroundColor,
+        backgroundColor: backgroundColorTop,
         appBar: AppBar(
-          backgroundColor: backgroundColor,
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              );
-            },
-          ),
+          backgroundColor: backgroundColorTop,
           title: Text('Arbetare',
               style: TextStyle(
                   color: light,
@@ -81,11 +72,89 @@ class HomePage extends State<MyApp> {
           centerTitle: true,
           elevation: 0.0,
         ),
+        drawer: Drawer(
+            child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+            backgroundColorTop,
+            backgroundColorMiddle,
+            backgroundColorBottom
+          ], stops: [
+            0.2,
+            0.6,
+            0.9
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+          child: ListView(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                  decoration: BoxDecoration(color: backgroundColorTop),
+                  accountName: Text(
+                    "Ashish Rawat",
+                    style: TextStyle(fontFamily: 'Questrial', fontSize: 17.0),
+                  ),
+                  accountEmail: Text(
+                    "ashishrawat2911@gmail.com",
+                    style: TextStyle(fontFamily: 'Questrial', fontSize: 19.0),
+                  ),
+                  currentAccountPicture: CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage: NetworkImage(
+                        "https://scontent-mia3-2.xx.fbcdn.net/v/t1.0-9/46733082_480567589018490_4803908490940645376_o.jpg?_nc_cat=106&_nc_ht=scontent-mia3-2.xx&oh=2b0e006d67016a790e19255372cb70cf&oe=5D030306"),
+                    backgroundColor: Colors.transparent,
+                  )),
+              ListTile(
+                title: Text(
+                  "Perfil",
+                  style: TextStyle(
+                    color: secundary,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Questrial',
+                    fontSize: 24.0,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: secundary,
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  "Configuración",
+                  style: TextStyle(
+                    color: secundary,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Questrial',
+                    fontSize: 24.0,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: secundary,
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  "Cerrar sessión",
+                  style: TextStyle(
+                    color: secundary,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Questrial',
+                    fontSize: 24.0,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: secundary,
+                ),
+              ),
+            ],
+          ),
+        )),
         bottomNavigationBar: CurvedNavigationBar(
           color: primary,
           buttonBackgroundColor: secundary,
           initialIndex: indexPage,
-          backgroundColor: backgroundColor,
+          backgroundColor: backgroundColorBottom,
           items: <Widget>[
             Icon(
               Icons.add,
